@@ -6,15 +6,15 @@ use App\Mapel;
 use Illuminate\Http\Request;
 
 class MapelController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    {
+        public function __construct(){
+            return $this->middleware('auth');
+        }
     public function index()
     {
-        //
+        $mapel = Mapel::all();
+        return view('mapel.index', compact('mapel'));
+
     }
 
     /**
@@ -24,7 +24,9 @@ class MapelController extends Controller
      */
     public function create()
     {
-        //
+
+            //Menampilkan Ke Halaman form input
+            return view('mapel.create');
     }
 
     /**
@@ -35,51 +37,63 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mapel = new Mapel();
+        $mapel->mapel =$request->nama;
+        $mapel->save();
+        return redirect()->route('mapel.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Mapel  $mapel
+     * @param  \App\Mapel  $Mapel
      * @return \Illuminate\Http\Response
      */
-    public function show(Mapel $mapel)
+    public function show($id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        return view('mapel.show', compact('mapel'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Mapel  $mapel
+     * @param  \App\Mapel  $Mapel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mapel $mapel)
+    public function edit($id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        return view('mapel.edit', compact('mapel'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mapel  $mapel
+     * @param  \App\Mapel  $Mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request, $id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        $mapel->mapel = $request->nama;
+        $mapel->save();
+        return redirect()->route('mapel.index');
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Mapel  $mapel
+     * @param  \App\Mapel  $Mapel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        //
+        $mapel = Mapel::findOrFail($id)->delete();
+        return redirect()->route('mapel.index');
     }
 }

@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Crud
+//Crud Kelas
 Route::resource('kelas', 'KelasController');
-Route::resource('mapel', 'MataPelajaranController');
+//Crud Mapel
+Route::resource('mapel', 'MapelController');
+//Crud Siswa
+Route::resource('siswa', 'SiswaController');
+

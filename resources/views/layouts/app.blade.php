@@ -38,6 +38,8 @@
                     Daftar kelas</a>
                     <a class="navbar-brand" href="{{route('mapel.index')}}">
                     Daftar Mata Pelajaran</a>
+                    <a class="navbar-brand" href="{{route('siswa.index')}}">
+                    Daftar Siswa</a>
 
                     </li>
                     </ul>

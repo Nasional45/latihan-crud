@@ -10,7 +10,7 @@
                 <div class="card-body">
                 <div class="form-group">
                     <label>Mapel</label>
-                    <input type="text" name="mapel" value="{{ $mapel->mapel }}"
+                    <input type="text" name="nama" value="{{ $mapel->mapel }}"
                     class="form-control" readonly>
                 </div>
                 <div class="form-group">
