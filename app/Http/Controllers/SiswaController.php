@@ -8,9 +8,9 @@ use DB;
 use App\Mapel;
 class SiswaController extends Controller
 {
-    // public function __construct(){
-    //     return $this->middleware('auth');
-    // }
+     public function __construct(){
+         return $this->middleware('auth');
+     }
     public function index()
     {
 //         $siswa = DB::table('siswas')->join('kelas', 'kelas.id', '=',
@@ -77,8 +77,9 @@ class SiswaController extends Controller
     {
         $kelas = Kelas::all();
         $siswa = Siswa::findOrFail($id);
-        $mapel = Mapel::findOrFail($id);
-        return view('siswa.edit', compact('siswa', 'kelas'));
+        $mapel = Mapel::all();
+        $selected = $siswa->mapel->pluck('id')->toArray();
+        return view('siswa.edit', compact('siswa', 'selected', 'kelas', 'mapel'));
     }
 
 
@@ -111,6 +112,8 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id)->delete();
+        $siswa->mapel()->detach();
+        $siswa->delete();
         return redirect()->route('siswa.index');
     }
 }

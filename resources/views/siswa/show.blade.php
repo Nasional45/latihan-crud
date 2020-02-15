@@ -29,6 +29,11 @@
                     class="form-control" readonly>
                 </div>
                 <div class="form-group">
+                    <label>Mata Pelajaran</label>
+                    <input type="text" name="mapel[]" value="{{$data->mapel}}"
+                    class="form-control" readonly>
+                </div>
+                <div class="form-group">
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                 </div>
                 </div>
